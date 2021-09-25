@@ -35,6 +35,12 @@ namespace API
             services.AddDbContext<ProjectDbContext>
                (item => item.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddCors(o => o.AddPolicy("Policy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
             services.AddSwaggerGen();
 
             services.AddScoped(typeof(IGenericRepository<Employee>), typeof(GenericRepository<Employee>));
@@ -53,6 +59,7 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors("Policy");
 
             app.UseHttpsRedirection();
 
