@@ -47,6 +47,8 @@ namespace API
             services.AddScoped(typeof(IGenericRepository<Department>), typeof(GenericRepository<Department>));
 
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IDepartmentService, DepartmentsService>();
+
 
 
 
